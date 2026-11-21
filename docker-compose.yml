@@ -1,0 +1,25 @@
+services:
+  postgres-cuchau:
+    image: postgres:16-alpine
+    container_name: postgres-cuchau
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: cuchau_usuarios
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_cuchau:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer-cuchau
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-cuchau
+
+volumes:
+  pgdata_cuchau:
