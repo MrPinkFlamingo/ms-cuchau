@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "usuarios")
 public class Usuario {
 
-    // region 1. Atributos / Columnas de la Base de Datos
+    //#region ATRIBUTOS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +30,10 @@ public class Usuario {
     private String contrasena;
 
     @Column(nullable = false, length = 20)
-    private String rol = "CLIENTE"; // "ADMIN", "VENDEDOR", "CLIENTE"
+    private String rol = "cliente"; // "admin", "vendedor", "cliente"
+
+    @Column(nullable = false, length = 20)
+    private String estado = "Activo"; // "Activo", "Inactivo"
 
     @Column(length = 50)
     private String region;
@@ -40,16 +43,15 @@ public class Usuario {
 
     @Column(length = 300)
     private String direccion;
-    // endregion
+    //#endregion
 
-    // region 2. Constructores
-    // Constructor vacío exigido por JPA
+    //#region CONSTRUCTORES
     public Usuario() {
     }
 
-    // Constructor con todos los campos
     public Usuario(Long id, String rut, String nombre, String apellidos, String fechaNacimiento,
-    String correo, String contrasena, String rol, String region, String ciudad, String direccion) {
+                    String correo, String contrasena, String rol, String estado,
+                    String region, String ciudad, String direccion) {
         this.id = id;
         this.rut = rut;
         this.nombre = nombre;
@@ -57,103 +59,49 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
         this.correo = correo;
         this.contrasena = contrasena;
-        this.rol = (rol != null && !rol.isBlank()) ? rol : "CLIENTE";
+        this.rol = (rol != null && !rol.isBlank()) ? rol : "cliente";
+        this.estado = (estado != null && !estado.isBlank()) ? estado : "Activo";
         this.region = region;
         this.ciudad = ciudad;
         this.direccion = direccion;
     }
-    // endregion
+    //#endregion
 
-    // region 3. Getters
-    public Long getId() {
-        return id;
-    }
+    //#region GETTERS Y SETTERS
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getRut() {
-        return rut;
-    }
+    public String getRut() { return rut; }
+    public void setRut(String rut) { this.rut = rut; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getApellidos() {
-        return apellidos;
-    }
+    public String getApellidos() { return apellidos; }
+    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
+    public String getFechaNacimiento() { return fechaNacimiento; }
+    public void setFechaNacimiento(String fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
 
-    public String getCorreo() {
-        return correo;
-    }
+    public String getCorreo() { return correo; }
+    public void setCorreo(String correo) { this.correo = correo; }
 
-    public String getContrasena() {
-        return contrasena;
-    }
+    public String getContrasena() { return contrasena; }
+    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
 
-    public String getRol() {
-        return rol;
-    }
+    public String getRol() { return rol; }
+    public void setRol(String rol) { this.rol = rol; }
 
-    public String getRegion() {
-        return region;
-    }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
-    public String getCiudad() {
-        return ciudad;
-    }
+    public String getRegion() { return region; }
+    public void setRegion(String region) { this.region = region; }
 
-    public String getDireccion() {
-        return direccion;
-    }
-    // endregion
+    public String getCiudad() { return ciudad; }
+    public void setCiudad(String ciudad) { this.ciudad = ciudad; }
 
-    // region 4. Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-    // endregion
-
+    public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+    //#endregion
 }

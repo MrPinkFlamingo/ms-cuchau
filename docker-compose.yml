@@ -21,5 +21,21 @@ services:
     depends_on:
       - postgres-cuchau
 
+  ms-usuarios:
+    build:
+      context: ./ms-usuarios
+      dockerfile: Dockerfile
+    image: ms-usuarios:latest
+    container_name: ms-usuarios
+    restart: always
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-cuchau:5432/cuchau_usuarios
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password123
+    depends_on:
+      - postgres-cuchau
+
 volumes:
   pgdata_cuchau:
